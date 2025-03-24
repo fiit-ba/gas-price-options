@@ -1,0 +1,94 @@
+.position-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.position-header {
+  margin-bottom: 1.5rem;
+}
+
+.position-header h4 {
+  margin: 0;
+  color: #333;
+}
+
+.position-address {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.position-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-label {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.detail-value {
+  font-weight: 500;
+  color: #333;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.status-badge.active {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-badge.settled {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-badge.expired {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.position-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.settle-button {
+  background-color: #1976d2;
+  color: white;
+}
+
+.settle-button:hover {
+  background-color: #1565c0;
+}
+
+.settle-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+} 

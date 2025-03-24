@@ -1,0 +1,28 @@
+{
+  "name": "options-app",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "contracts"
+  ],
+  "scripts": {
+    "frontend": "cd frontend && npm start",
+    "frontend:test": "cd frontend && npm test",
+    "frontend:build": "cd frontend && npm run build",
+
+    "contracts": "cd contracts && npx hardhat node",
+    "contracts:test": "cd contracts && npx hardhat test",
+    "contracts:test:pricing": "cd contracts && npx hardhat test test/GasOptionPricing.test.js",
+    "contracts:compile": "cd contracts && npx hardhat compile",
+      
+    "start:frontend": "cd frontend && npm start",
+    "start:contracts": "cd contracts && npx hardhat node",
+    "start:deploy": "cd contracts && npx hardhat ignition deploy ./ignition/modules/GasOptions.js --network localhost && npm run export-contracts",
+    "start:keeper": "cd keeper && node index.js",
+    "start": "concurrently \"npm run start:contracts\" \"npm run start:deploy\" \"npm run start:frontend\" \"npm run start:keeper\"",
+    "export-contracts": "cd contracts && npx hardhat run scripts/export-contracts.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}

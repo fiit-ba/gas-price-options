@@ -1,0 +1,475 @@
+{
+    "GasOption": {
+    "abi": [
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_writer",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_availableUntilBlock",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "hurstExponent",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "meanReversionSpeed",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "volatility",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "meanGasPrice",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "minPremium",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "maxPrice",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct GasOption.OptionParameters",
+            "name": "_parameters",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "operation",
+            "type": "string"
+          }
+        ],
+        "name": "NumericalOverflow",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "param",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "max",
+            "type": "uint256"
+          }
+        ],
+        "name": "ParameterOutOfBounds",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ReentrancyGuardReentrantCall",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "int256",
+            "name": "value",
+            "type": "int256"
+          }
+        ],
+        "name": "SafeCastOverflowedIntToUint",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "SafeCastOverflowedUintToInt",
+        "type": "error"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "buyer",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "currentGasPrice",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "strikePrice",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "expirationBlock",
+            "type": "uint256"
+          }
+        ],
+        "name": "OptionBought",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "newAvailableUntilBlock",
+            "type": "uint256"
+          }
+        ],
+        "name": "OptionExtended",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "settler",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "settlementAmount",
+            "type": "uint256"
+          }
+        ],
+        "name": "OptionSettled",
+        "type": "event"
+      },
+      {
+        "inputs": [],
+        "name": "KEEPER_FEE_PERCENTAGE",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "availableUntilBlock",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "strikePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "duration",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountOfContracts",
+            "type": "uint256"
+          }
+        ],
+        "name": "buyOption",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "strikePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "duration",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "contractsAmount",
+            "type": "uint256"
+          }
+        ],
+        "name": "calculatePremium",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "clearOption",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "additionalBlocks",
+            "type": "uint256"
+          }
+        ],
+        "name": "extend",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "factory",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "getFirstToExpire",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "keeperSettle",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "parameters",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "hurstExponent",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "meanReversionSpeed",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "volatility",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "meanGasPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minPremium",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxPrice",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "positions",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "contractsAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "strikePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "expirationBlock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "premium",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "isSettled",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isActive",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "settleOption",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "hurstExponent",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "meanReversionSpeed",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "volatility",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "meanGasPrice",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "minPremium",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "maxPrice",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct GasOption.OptionParameters",
+            "name": "newParams",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "newAvailableUntilBlock",
+            "type": "uint256"
+          }
+        ],
+        "name": "updateParameters",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "withdrawForce",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "writer",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "stateMutability": "payable",
+        "type": "receive"
+      }
+    ]
+  }
+}

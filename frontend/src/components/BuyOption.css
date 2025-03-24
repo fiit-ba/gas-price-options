@@ -1,0 +1,128 @@
+.options-list {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.option-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.card-header {
+  background: #f5f5f5;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.card-content {
+  display: flex;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.parameters-section {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.parameters-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.parameters-section li {
+  margin-bottom: 0.3rem;
+}
+
+.purchase-controls {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sliders-section {
+  display: flex;
+  gap: 2rem;
+}
+
+.slider-quadrant {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.slider-top {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.slider-bottom {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-top input[type="range"] {
+  width: 100%;
+}
+
+.slider-bottom input[type="number"] {
+  text-align: center;
+}
+
+.purchase-section {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.buy-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buy-button:hover {
+  background: #45a049;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.quote-button {
+  background: #2196F3;
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.quote-button:hover {
+  background: #1976D2;
+}
+
+.buy-button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.purchase-section p {
+  margin: 0.5rem 0;
+  font-weight: bold;
+} 

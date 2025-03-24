@@ -1,0 +1,38 @@
+.my-options-container {
+  padding: 2rem;
+}
+
+.my-options-container h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.written-options,
+.bought-options {
+  margin-bottom: 2rem;
+}
+
+.options-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.option-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.option-item h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.option-item p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #666;
+} 
