@@ -164,7 +164,7 @@ contract GasOption is ReentrancyGuard {
         uint256 currentL1Gas = l1Block.basefee();
         uint256 keeperTotalReward = 0;
         
-        require(firstToExpire > 0 || firstToExpire == currentL1Block, "No expiry in this blocks");
+        require(firstToExpire > 0 && firstToExpire == currentL1Block, "No expiry in this blocks");
         
         EnumerableSet.AddressSet storage addresses = expiryToAddresses[firstToExpire];
         uint256 addressCount = addresses.length();
